@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QicheServer", "QicheServer\QicheServer.csproj", "{5AD8E6BC-3092-4D1E-AD7C-2DE717930679}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C97F322-4306-40FC-AFCF-753384D80046} = {8C97F322-4306-40FC-AFCF-753384D80046}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QicheClient", "QicheClient\QicheClient.csproj", "{45FA0A6D-4221-4B83-ACF3-CB067BBEA4ED}"
 EndProject
