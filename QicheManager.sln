@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QicheManager", "QicheManager\QicheManager.csproj", "{EE556032-566F-42B4-AFD6-0AEE450BD6B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QicheServer", "QicheServer\QicheServer.csproj", "{5AD8E6BC-3092-4D1E-AD7C-2DE717930679}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QicheClient", "QicheClient\QicheClient.csproj", "{45FA0A6D-4221-4B83-ACF3-CB067BBEA4ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{8C97F322-4306-40FC-AFCF-753384D80046}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EE556032-566F-42B4-AFD6-0AEE450BD6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE556032-566F-42B4-AFD6-0AEE450BD6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE556032-566F-42B4-AFD6-0AEE450BD6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE556032-566F-42B4-AFD6-0AEE450BD6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD8E6BC-3092-4D1E-AD7C-2DE717930679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD8E6BC-3092-4D1E-AD7C-2DE717930679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD8E6BC-3092-4D1E-AD7C-2DE717930679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD8E6BC-3092-4D1E-AD7C-2DE717930679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45FA0A6D-4221-4B83-ACF3-CB067BBEA4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45FA0A6D-4221-4B83-ACF3-CB067BBEA4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45FA0A6D-4221-4B83-ACF3-CB067BBEA4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45FA0A6D-4221-4B83-ACF3-CB067BBEA4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C97F322-4306-40FC-AFCF-753384D80046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C97F322-4306-40FC-AFCF-753384D80046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C97F322-4306-40FC-AFCF-753384D80046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C97F322-4306-40FC-AFCF-753384D80046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
