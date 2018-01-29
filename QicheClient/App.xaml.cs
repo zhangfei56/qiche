@@ -18,22 +18,22 @@ namespace QicheClient
         {
             base.OnStartup(e);
 
-            LoginWindow lw = new LoginWindow();
-            bool? result = lw.ShowDialog();
+            //LoginWindow lw = new LoginWindow();
+            //bool? result = lw.ShowDialog();
             
-            if (result.Value == true)
-            {
+            //if (result.Value == true)
+            //{
                 MainWindow mw = new MainWindow();
                 MainWindow = mw;
 
                 mw.ShowDialog();
 
                 Current.Shutdown();//关闭当前的应用程序
-            }
-            else
-            {
-                Environment.Exit(0);
-            }
+            //}
+            //else
+            //{
+            //    Environment.Exit(0);
+            //}
 
         }
 

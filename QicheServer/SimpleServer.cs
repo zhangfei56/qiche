@@ -1,27 +1,44 @@
 ﻿using CommonLibrary;
+using CommonLibrary.Model;
 using HslCommunication;
 using HslCommunication.BasicFramework;
 using HslCommunication.Enthernet;
 using HslCommunication.LogNet;
+using MongoDB.Bson.Serialization.Serializers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Xml.Linq;
 
 namespace QicheServer
 {
     class SimpleServer
     {
-        private NetSimplifyServer net_simplify_server = new NetSimplifyServer();
+        VehicleManager vehicleManager;
+        private NetSimplifyServer net_simplify_server ;
 
         private string LogSavePath { get; set; }
+
+
+        public SimpleServer()
+        {
+            this.net_simplify_server = new NetSimplifyServer();
+            this.vehicleManager = new VehicleManager();
+            InitLogPath();
+            //vehicleManager.AddUser();
+           // vehicleManager.AddVehicle();
+            //List<Vehicle> vs = vehicleManager.GetAllVehicle();
+            
+        }
 
         /// <summary>
         /// 同步传送数据的初始化
         /// </summary>
-        private void Net_Simplify_Server_Initialization()
+        public void StartServer()
         {
             try
             {
@@ -79,16 +96,45 @@ namespace QicheServer
         /// <param name="data">实际的数据</param>
         private void DataProcessingWithStartA(AsyncStateOne state, NetHandle handle, string data)
         {
-            //if (handle == CommonHeadCode.SimplifyHeadCode.维护检查)
-            //{
-            //    net_simplify_server.SendMessage(state, handle,
-            //    UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
-            //    UserServer.ServerSettings.Account_Forbidden_Reason);
-            //}
-            //else if (handle == CommonHeadCode.SimplifyHeadCode.更新检查)
-            //{
-            //    net_simplify_server.SendMessage(state, handle, UserServer.ServerSettings.SystemVersion.ToString());
-            //}
+            if (handle == CommonHeadCode.SimplifyHeadCode.ConnectCheck)
+            {
+                net_simplify_server.SendMessage(state, handle, SoftResources.SystemResouce.Success);
+                
+            }else if (handle == CommonHeadCode.SimplifyHeadCode.UserLogin)
+            {
+                JObject json = JObject.Parse(data.Trim());
+
+                string name = SoftBasic.GetValueFromJsonObject(json, SoftResources.StringResouce.UserNameText, "");
+                string password = SoftBasic.GetValueFromJsonObject(json, SoftResources.StringResouce.PasswordText, "");
+                if(name == "admin" && password == "admin")
+                {
+                    net_simplify_server.SendMessage(state, handle, SoftResources.SystemResouce.Success);
+                }else
+                {
+                    net_simplify_server.SendMessage(state, handle, SoftResources.SystemResouce.Failed);
+                }
+            }else if(handle == CommonHeadCode.SimplifyHeadCode.AccountUserList)
+            {
+                List<UserAccount> users = vehicleManager.GetAllUserAccountInfo();
+                
+                net_simplify_server.SendMessage(state, handle, JsonConvert.SerializeObject(users));
+                
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.VehicleList)
+            {
+                List<Vehicle> vehicles = vehicleManager.GetAllVehicle();
+
+                net_simplify_server.SendMessage(state, handle, JsonConvert.SerializeObject(vehicles));
+
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.VehicleUpdate)
+            {
+                Vehicle vehicle = JsonConvert.DeserializeObject<Vehicle>(data);
+                vehicleManager.UpdateVehicle(vehicle);
+
+                net_simplify_server.SendMessage(state, handle, SoftResources.SystemResouce.Success);
+
+            }
 
         }
 
@@ -112,14 +158,7 @@ namespace QicheServer
         /// <param name="data">来自客户端的字节数据</param>
         private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, NetHandle customer, byte[] data)
         {
-            if (customer == CommonHeadCode.SimplifyHeadCode.性能计数)
-            {
-                //net_simplify_server.SendMessage(state, customer, GetPerfomace());
-            }
-            else
-            {
-                net_simplify_server.SendMessage(state, customer, data);
-            }
+            
         }
 
 

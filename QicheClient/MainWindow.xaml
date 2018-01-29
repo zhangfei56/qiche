@@ -5,9 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Loaded="Window_Loaded"
+        xmlns:local="clr-namespace:QicheClient"
         mc:Ignorable="d"
-        Title="sfsf" Height="300" Width="500" >
-    <Grid>
-        <Button>ss</Button>
-    </Grid>
+        
+        Title="汽车管理" Height="700" Width="1200" >
+    <DockPanel>
+        <Grid>
+            <TreeView HorizontalAlignment="Left" Height="436" VerticalAlignment="Top" Width="179" >
+                <TreeViewItem Header="用户管理" IsExpanded="True">
+                    <TreeViewItem Header="查看用户" Selected="clickFindUsers"/>
+                    <TreeViewItem Header="增加用户" Selected="clickAddUser" />
+                </TreeViewItem>
+                <TreeViewItem Header="车辆管理" IsExpanded="True">
+                    <TreeViewItem Header="车辆信息" Selected="clickVehicleList" />
+                    <TreeViewItem Header="增加车辆">
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="保单管理" IsExpanded="True">
+                    <TreeViewItem Header="保单列表" />
+                    <TreeViewItem Header="增加保单"/>
+
+                </TreeViewItem>
+            </TreeView>
+        </Grid>
+        <Grid>
+            <GroupBox>
+                <Frame Name="mainFrame" NavigationUIVisibility="Hidden"></Frame>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+    
 </Window>

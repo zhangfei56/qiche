@@ -7,6 +7,11 @@ using System.Windows.Media.Animation;
 using System.Threading;
 using MaterialDesignThemes.Wpf;
 using System.IO;
+using ClientsLibrary;
+using CommonLibrary;
+using Newtonsoft.Json.Linq;
+using HslCommunication;
+using CommonLibrary.Model;
 
 namespace QicheClient
 {
@@ -20,6 +25,8 @@ namespace QicheClient
         public LoginWindow()
         {
             InitializeComponent();
+            UISettings(false);
+
         }
 
         #endregion
@@ -29,14 +36,28 @@ namespace QicheClient
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowToolTip.Opacity = 0;
+
+            Dispatcher.Invoke(new Action(() =>
+            {
+                if (UserClient.CheckServerUserful())
+                {
+                    UISettings(true);
+                    SetInformationString("连接服务器成功！");
+                }
+                else
+                {
+                    SetInformationString("连接服务器失败！");
+                }
+            }));
         }
+
 
         #endregion
 
         #region Login Click
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             //启动线程登录
             //验证输入
@@ -54,7 +75,7 @@ namespace QicheClient
                 return;
             }
 
-            SetInformationString("正在验证维护状态...");
+            SetInformationString("正在验证用户名和密码...");
             UISettings(false);
 
             UserName = NameTextBox.Text;
@@ -84,57 +105,39 @@ namespace QicheClient
         /// </summary>
         private void ThreadCheckAccount()
         {
-            //定义委托
-            Action<string> message_show = delegate (string message)
+            JObject json = new JObject
             {
-                Dispatcher.Invoke(new Action(() =>
-                {
-                    SetInformationString(message);
-                }));
+                { SoftResources.StringResouce.UserNameText, new JValue(UserName) },                                    // 用户名
+                { SoftResources.StringResouce.PasswordText, new JValue(UserPassword) },                                    // 密码
             };
-            Action start_update = delegate
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.UserLogin, json.ToString());
+
+            if (result.IsSuccess)
             {
-                Dispatcher.Invoke(new Action(() =>
+                if (result.Content == SoftResources.SystemResouce.Success)
                 {
-                    //需要该exe支持，否则将无法是实现自动版本控制
-                    string update_file_name = AppDomain.CurrentDomain.BaseDirectory + @"软件自动更新.exe";
-                    try
+                    Dispatcher.Invoke(new Action(() =>
                     {
-                        System.Diagnostics.Process.Start(update_file_name);
-                        Environment.Exit(0);//退出系统
-                    }
-                    catch
-                    {
-                        MessageBox.Show("更新程序启动失败，请检查文件是否丢失，联系管理员获取。");
-                    }
-                }));
-            };
-            Action thread_finish = delegate
-            {
-                Dispatcher.Invoke(new Action(() =>
+                        this.DialogResult = true;
+                        return;
+                    }));
+                }
+                else
                 {
-                    UISettings(true);
-                }));
-            };
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        UISettings(true);
+                        SetInformationString("用户名或者密码错误");
+                    }));
 
 
-            //// 启动密码验证
-            //if (AccountLogin.AccountLoginServer(
-            //    message_show,
-            //    start_update,
-            //    thread_finish,
-            //    UserName,
-            //    UserPassword,
-            //    IsChecked,
-            //    "wpf"))
-            //{
-                //启动主窗口
-                Dispatcher.Invoke(new Action(() =>
-                {                    
-                    this.DialogResult = true;
-                    return;
-                }));
-            //}
+                }
+            }
+            else
+            {
+                SetInformationString(result.Message);
+            }
+            
             
         }
 
@@ -183,8 +186,6 @@ namespace QicheClient
             LoginButton.Focus();
         }
 
-
-
         private void NameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key==Key.Enter)  PasswordBox.Focus();
@@ -192,7 +193,7 @@ namespace QicheClient
 
         private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) Button_Click(null, new RoutedEventArgs());
+            if (e.Key == Key.Enter) LoginButton_Click(null, new RoutedEventArgs());
         }
 
 

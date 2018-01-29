@@ -8,14 +8,10 @@ using System.Net;
 using CommonLibrary;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
+using CommonLibrary.Model;
 
 namespace ClientsLibrary
 {
-    public class UserAccount
-    {
-        public string UserName;
-    }
-
 
     /// <summary>
     /// 一个通用的用户客户端类, 包含了一些静态的资源
@@ -25,9 +21,9 @@ namespace ClientsLibrary
 
         public static string ServerIp { get; set; } = ConfigurationManager.AppSettings["ServerIp"];
 
-        public void CheckServerUserful()
+        public static Boolean CheckServerUserful()
         {
-
+            return Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.ConnectCheck).IsSuccess;
         }
 
 

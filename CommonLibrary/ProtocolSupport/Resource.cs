@@ -10,6 +10,12 @@ namespace CommonLibrary
     /// </summary>
     public class SoftResources
     {
+        public class SystemResouce
+        {
+            public static string Success { get; } = "success";
+            public static string Failed { get; } = "failed";
+        }
+
         /// <summary>
         /// 字符串资源中心
         /// </summary>
@@ -25,6 +31,14 @@ namespace CommonLibrary
             public const string AccountAddSuccess = "账户新增：";
             public const string AccountModifyPassword = "账户更改密码：";
             public const string AccountUploadPortrait = "账户更改头像：";
+            /// <summary>
+            /// 用于存储和传送的名称
+            /// </summary>
+            public static string UserNameText { get { return "UserName"; } }
+            /// <summary>
+            /// 用于存储和传送的名称
+            /// </summary>
+            public static string PasswordText { get { return "Password"; } }
         }
     }
 }

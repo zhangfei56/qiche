@@ -61,7 +61,7 @@
                      x:Name="PasswordBox" KeyDown="PasswordBox_KeyDown"
                      materialDesign:HintAssist.Hint="请输入密码" />
                 <Button x:Name="LoginButton" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="100" Height="35"
-                    Click="Button_Click">
+                    Click="LoginButton_Click">
                     登录系统
                 </Button>
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="92,8,8,8">
