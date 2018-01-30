@@ -27,6 +27,8 @@ namespace QicheClient
             allViews.Add("userList", new Uri("pages/userList.xaml", UriKind.Relative));
             allViews.Add("addUser", new Uri("pages/addUser.xaml", UriKind.Relative));
             allViews.Add("vehicleList", new Uri("pages/vehicleList.xaml", UriKind.Relative));
+            allViews.Add("addVehicle", new Uri("pages/addVehicle.xaml", UriKind.Relative));
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -51,6 +53,12 @@ namespace QicheClient
         {
             mainFrame.Navigate(allViews["vehicleList"]);                    //Frame导航函数，导航到page2
         }
+
+        public void clickAddVehicle(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(allViews["addVehicle"]);                    //Frame导航函数，导航到page2
+        }
+
 
         [DllImport("User32.dll")]
         private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);

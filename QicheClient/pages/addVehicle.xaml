@@ -1,0 +1,104 @@
+﻿<Page x:Class="QicheClient.pages.AddVehiclePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:QicheClient.pages"
+      mc:Ignorable="d" 
+      Loaded="Window_Loaded"
+      Title="增加车辆">
+
+    <StackPanel Orientation="Vertical" MinWidth="500">
+
+        <StackPanel Name="vehicleModel" Orientation="Vertical"  DataContext="{Binding }" >
+            <StackPanel Orientation="Horizontal" Margin="5,2,5,2">
+
+                <TextBlock Text="汽车牌照:" />
+                <TextBox  MinWidth="100" Text="{Binding VehicleNumber}"/>
+                <TextBlock Text="保险单号:" />
+                <TextBox  MinWidth="100" Text="{Binding policy.PolicyId}"/>
+                <TextBlock Text="厂牌型号:" />
+                <TextBox  MinWidth="100" Text="{Binding CompanyType}"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,2,5,2">
+
+                <TextBlock Text="车主名字:" />
+                <TextBox  MinWidth="100" Text="{Binding owner.UserName}"/>
+                <TextBlock Text="保险开始时间:" />
+                <TextBox  MinWidth="100" Text="{Binding policy.EndDateTime}"/>
+                <TextBlock Text="保险到期时间:" />
+                <TextBox  MinWidth="100" Text="{Binding policy.EndDateTime}"/>
+            </StackPanel>
+            <StackPanel>
+                <ListView Name="policyTypeView" ItemsSource="{Binding Path=policy.PolicyTypes}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="保险种类">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox MinWidth="100" Text="{Binding Name}"/>
+
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="费率浮动">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox MinWidth="100" Text="{Binding RateFloating}"/>
+
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="保险金额">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox MinWidth="100" Text="{Binding ReceiveMoney}"/>
+
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="保险费">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox MinWidth="100" Text="{Binding PayMoney}"/>
+
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="操  作"   >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:PackIcon  Kind="Delete" MouseDown="btnPolicyTypeDelete_Click"  HorizontalAlignment="Center"
+                                             Margin="0,4,0,0"/>
+
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                    
+                </ListView>
+            </StackPanel>
+            <Button Click="btnVehicleAdd_Click">增加</Button>
+
+        </StackPanel>
+
+        <!--<Button Height="23" HorizontalAlignment="Left" Margin="18,0,0,16" Name="btnFirst" 
+                VerticalAlignment="Bottom" Width="75" Click="btnFirst_Click">First</Button>
+        <Button Height="23" HorizontalAlignment="Left" Margin="115,0,0,16" Name="btnPrev" 
+                VerticalAlignment="Bottom" Width="75" Click="btnPrev_Click">Previous</Button>
+        <Button Height="23" Margin="213,0,269,16" Name="btnNext" 
+                VerticalAlignment="Bottom" Click="btnNext_Click">Next</Button>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,167,16" Name="btnLast" 
+                VerticalAlignment="Bottom" Width="75" Click="btnLast_Click">Last</Button>
+
+        <TextBlock Height="21" Margin="442,0,93,18" Name="tbCurrentPage" 
+                   VerticalAlignment="Bottom" />
+        <TextBlock Height="21" HorizontalAlignment="Right" Margin="0,0,67,17" Name="textBlock3" 
+                   VerticalAlignment="Bottom" Width="20" Text="/"/>
+        <TextBlock Height="21" HorizontalAlignment="Right" Margin="0,0,45,18" Name="tbTotalPage" 
+                   VerticalAlignment="Bottom" Width="28" />-->
+    </StackPanel>
+</Page>

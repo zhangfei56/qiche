@@ -25,5 +25,13 @@ namespace CommonLibrary.Model
 
         [BsonElement]
         public List<PolicyType> PolicyTypes { get; set; }
+
+        public Policy()
+        {
+            PolicyTypes = new List<PolicyType>();
+            StartDateTime = DateTime.Now;
+            EndDateTime = DateTime.Now;
+            NeedRemind = false;
+        }
     }
 }

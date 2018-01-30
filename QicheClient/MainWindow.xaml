@@ -18,7 +18,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="车辆管理" IsExpanded="True">
                     <TreeViewItem Header="车辆信息" Selected="clickVehicleList" />
-                    <TreeViewItem Header="增加车辆">
+                    <TreeViewItem Header="增加车辆" Selected="clickAddVehicle">
                     </TreeViewItem>
                 </TreeViewItem>
                 <TreeViewItem Header="保单管理" IsExpanded="True">

@@ -21,6 +21,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MaterialDesignThemes.Wpf;
+using System.Globalization;
 
 namespace QicheClient.pages
 {
@@ -62,6 +64,8 @@ namespace QicheClient.pages
             view.Source = customers;
 
             this.vehicleListView.DataContext = view;
+            if (customers.Count != 0) 
+                this.vehicleListView.SelectedIndex = 0;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
@@ -96,5 +100,27 @@ namespace QicheClient.pages
                 //SetInformationString(result.Message);
             }
         }
+
+        private void btnPolicyTypeDelete_Click(object sender, RoutedEventArgs e)
+        {
+            policyTypeView.SelectedItem = ((PackIcon)sender).DataContext;
+
+            //在数据集合中删除此元素 
+            Vehicle vehicle = (Vehicle)this.vehicleListView.SelectedItem;
+            vehicle.policy.PolicyTypes.RemoveAt(policyTypeView.SelectedIndex);
+            policyTypeView.Items.Refresh();
+        }
+
+        private void btnPolicyTypeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            PolicyType type = new PolicyType();
+            Vehicle vehicle = (Vehicle)this.vehicleListView.SelectedItem;
+            vehicle.policy.PolicyTypes.Add(type);
+            vehicleListView.Items.Refresh();//刷新listview
+            policyTypeView.Items.Refresh();
+        }
+
     }
+
+
 }

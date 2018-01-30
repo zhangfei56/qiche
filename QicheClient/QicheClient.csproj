@@ -74,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="pages\addVehicle.xaml.cs">
+      <DependentUpon>addVehicle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\vehicleList.xaml.cs">
       <DependentUpon>vehicleList.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\addVehicle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="pages\vehicleList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

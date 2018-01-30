@@ -30,7 +30,7 @@ namespace QicheServer
             this.vehicleManager = new VehicleManager();
             InitLogPath();
             //vehicleManager.AddUser();
-           // vehicleManager.AddVehicle();
+            //vehicleManager.AddVehicle();
             //List<Vehicle> vs = vehicleManager.GetAllVehicle();
             
         }

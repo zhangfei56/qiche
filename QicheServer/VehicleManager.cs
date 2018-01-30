@@ -51,11 +51,13 @@ namespace QicheServer
             PolicyType policyType = new PolicyType();
             policyType.Name = "保险1";
             policyType.PayMoney = "23";
+            policyType.ReceiveMoney = "2";
             policyType.RateFloating = "0.4";
             types.Add(policyType);
 
             PolicyType policyType2 = new PolicyType();
             policyType2.Name = "保险2";
+            policyType2.ReceiveMoney = "3.2";
             policyType2.PayMoney = "33";
             policyType2.RateFloating = "0.43";
             types.Add(policyType2);

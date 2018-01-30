@@ -32,5 +32,11 @@ namespace CommonLibrary.Model
 
         [BsonElement]
         public Policy policy { get; set; }
+
+        public Vehicle()
+        {
+            owner = new VehicleOwner();
+            policy = new Policy();
+        }
     }
 }
